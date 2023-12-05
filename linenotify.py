@@ -94,7 +94,7 @@ class LineNotify:
                 ratelimit = resp.headers.get('X-RateLimit-ImageRemaining')
                 return int(ratelimit)
         
-line = LineNotify('wYvj9BLIiklgjtJh08rPiW0V5joxvbtotwTVchiMc1v')
+line = LineNotify('your token')
 asyncio.run(line.push_message_notify("hello 123"))
 
 
