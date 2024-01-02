@@ -1,0 +1,3653 @@
+[
+    {
+        "id": "6d376c6ed6f4bc63",
+        "type": "tab",
+        "label": "to neopixel",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7dc5537943c4252d",
+        "type": "tab",
+        "label": "to LCD1602",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "28309d8b1abf5b6f",
+        "type": "tab",
+        "label": "EasyCAT 3232",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a1b2b31b.65fe7",
+        "type": "tab",
+        "label": "plc",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "53c51c90335d32aa",
+        "type": "junction",
+        "z": "6d376c6ed6f4bc63",
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "f6dfd3404c76be1d"
+            ]
+        ]
+    },
+    {
+        "id": "5ce76427a5ee9b64",
+        "type": "junction",
+        "z": "a1b2b31b.65fe7",
+        "x": 840,
+        "y": 740,
+        "wires": [
+            [
+                "e890a83109df4d13",
+                "843fe7b37a993958"
+            ]
+        ]
+    },
+    {
+        "id": "fa3e343f453be1d0",
+        "type": "junction",
+        "z": "a1b2b31b.65fe7",
+        "x": 610,
+        "y": 1260,
+        "wires": [
+            [
+                "87cfcff36b95e3b7"
+            ]
+        ]
+    },
+    {
+        "id": "f811cd5c.e9dfe8",
+        "type": "debug",
+        "z": "6d376c6ed6f4bc63",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 815,
+        "y": 220,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "3df34b3a.b6bb8c",
+        "type": "pythonshell in",
+        "z": "6d376c6ed6f4bc63",
+        "name": "neopixel",
+        "pyfile": "/home/jinyistudio/python/node-red-neopixel1.py",
+        "virtualenv": "/home/jinyistudio/python/blinka",
+        "continuous": true,
+        "stdInData": true,
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "f811cd5c.e9dfe8"
+            ]
+        ]
+    },
+    {
+        "id": "dc1b77ab2314c9df",
+        "type": "buffer-maker",
+        "z": "6d376c6ed6f4bc63",
+        "name": "",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "name": "cmd",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "neo_cmd"
+            },
+            {
+                "name": "num",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "neo_num"
+            },
+            {
+                "name": "red",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "neo_red"
+            },
+            {
+                "name": "green",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "neo_green"
+            },
+            {
+                "name": "blue",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "neo_blue"
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "x": 515,
+        "y": 220,
+        "wires": [
+            [
+                "c9c77172caa82a6c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "f52863b38668fbe0",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "OFF",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_cmd",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "53c51c90335d32aa"
+            ]
+        ]
+    },
+    {
+        "id": "503789e81099e66e",
+        "type": "random",
+        "z": "6d376c6ed6f4bc63",
+        "name": "",
+        "low": 1,
+        "high": "255",
+        "inte": "true",
+        "property": "value",
+        "x": 325,
+        "y": 300,
+        "wires": [
+            [
+                "f6dfd3404c76be1d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "f6dfd3404c76be1d",
+        "type": "function",
+        "z": "6d376c6ed6f4bc63",
+        "name": "function 1",
+        "func": "global.set(msg.topic,msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 405,
+        "y": 220,
+        "wires": [
+            [
+                "dc1b77ab2314c9df"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "5ae36a70f68ca1c5",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "red",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_red",
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "503789e81099e66e"
+            ]
+        ]
+    },
+    {
+        "id": "6f16bb05aa122ef9",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "green",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_green",
+        "x": 200,
+        "y": 360,
+        "wires": [
+            [
+                "503789e81099e66e"
+            ]
+        ]
+    },
+    {
+        "id": "aa7123d381ebe356",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "blue",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_blue",
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "503789e81099e66e"
+            ]
+        ]
+    },
+    {
+        "id": "c4e902ffaf83b6ba",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "ON",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_cmd",
+        "payload": "255",
+        "payloadType": "num",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "53c51c90335d32aa"
+            ]
+        ]
+    },
+    {
+        "id": "c9c77172caa82a6c",
+        "type": "function",
+        "z": "6d376c6ed6f4bc63",
+        "name": "function 2",
+        "func": "var buff=msg.payload;\nreturn { 'payload': Buffer.from(buff).toString('hex').toUpperCase()};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 575,
+        "y": 220,
+        "wires": [
+            [
+                "3df34b3a.b6bb8c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0ce45255bdaa0862",
+        "type": "inject",
+        "z": "6d376c6ed6f4bc63",
+        "name": "number",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "neo_num",
+        "payload": "255",
+        "payloadType": "num",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "53c51c90335d32aa"
+            ]
+        ]
+    },
+    {
+        "id": "915c5afa5bec36cb",
+        "type": "link in",
+        "z": "6d376c6ed6f4bc63",
+        "name": "link in 1",
+        "links": [
+            "e890a83109df4d13",
+            "42ea0c586fd98924"
+        ],
+        "x": 415,
+        "y": 100,
+        "wires": [
+            [
+                "dc1b77ab2314c9df"
+            ]
+        ]
+    },
+    {
+        "id": "d962a84209797d60",
+        "type": "comment",
+        "z": "6d376c6ed6f4bc63",
+        "name": "manual operation",
+        "info": "",
+        "x": 180,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7cd547abc5bdd362",
+        "type": "comment",
+        "z": "6d376c6ed6f4bc63",
+        "name": "node-red-neopixel1",
+        "info": "import sys\nimport board\nimport neopixel\nimport time\nimport asyncio\n\npixels = neopixel.NeoPixel(board.D18, 4)\nneo = [0,0,0,0,0]\n\nasync def loop_neopixel():\n  global ledOn\n  while\tTrue:\n    if neo[0]==255:\n\t    pixels.fill([neo[2],neo[3],neo[4]])\t   \n\n    elif neo[0]==0:\t    \n\t    pixels.fill(0)\n\n\n    await asyncio.sleep(0.2)    \n\t    \n\nasync def loop_stdin():\t\n\tglobal neo\n\n\tprint(\"Got arguments: \", sys.argv)\n\tloop = asyncio.get_event_loop()\n\twhile True:\n\t\ts1 = await loop.run_in_executor(None, sys.stdin.readline)\n\t\ts1 = s1.strip()\n\t\tif len(s1)==10:\n\t\t\tneo[0] = int(s1[0:2], 16)\n\t\t\tneo[1] = int(s1[2:4], 16)\n\t\t\tneo[2] = int(s1[4:6], 16)\n\t\t\tneo[3] = int(s1[6:8], 16)\n\t\t\tneo[4] = int(s1[8:10], 16)\n\n\t\tprint(s1)\n\t\tawait asyncio.sleep(0.025)  \n\nasync def main():\n    tasks = [loop_stdin(),loop_neopixel()]\n    await asyncio.gather(*tasks)\n\nasyncio.run(main())\n\n",
+        "x": 710,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cfde314537bdc840",
+        "type": "pythonshell in",
+        "z": "7dc5537943c4252d",
+        "name": "lcd1602",
+        "pyfile": "/home/jinyistudio/python/node-red-lcd1602-1.py",
+        "virtualenv": "/home/jinyistudio/python/blinka",
+        "continuous": true,
+        "stdInData": true,
+        "x": 840,
+        "y": 420,
+        "wires": [
+            [
+                "104e79aa9fea9385"
+            ]
+        ]
+    },
+    {
+        "id": "997e0123266a5be0",
+        "type": "json",
+        "z": "7dc5537943c4252d",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 670,
+        "y": 420,
+        "wires": [
+            [
+                "cfde314537bdc840"
+            ]
+        ]
+    },
+    {
+        "id": "80032e2.7c92cd",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "L1,2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clear\":true,\"msgs\":[{\"text\":\"hello\",\"center\":false},{\"text\":\"jinyistudio\",\"center\":true}]}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "104e79aa9fea9385",
+        "type": "debug",
+        "z": "7dc5537943c4252d",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 995,
+        "y": 420,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "c3de6f82bf8525cd",
+        "type": "comment",
+        "z": "7dc5537943c4252d",
+        "name": "command format",
+        "info": "{\n    \"clear\": true,\n    \"msgs\": [\n        {\n            \"text\": \"hello\",\n            \"center\": false\n        },\n        {\n            \"text\": \"jinyistudio\",\n            \"center\": true\n        }\n    ]\n}",
+        "x": 160,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ad500849193ec743",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "(x,y)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clear\":true,\"msgs\":[{\"x\":2,\"y\":0,\"text\":\"(2,0)\",\"center\":true},{\"x\":5,\"y\":1,\"text\":\"(5,1)\",\"center\":true}]}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 340,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "1a75adf20c818337",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "clear",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"clear\":true}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "f4c84af7b51f1d57",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "cursor hide",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"cursor\":0}",
+        "payloadType": "json",
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "7952a8d1bc833e65",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "cursor line",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"cursor\":1}",
+        "payloadType": "json",
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "e1593e941a4b8fa0",
+        "type": "inject",
+        "z": "7dc5537943c4252d",
+        "name": "cursor blink",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"cursor\":2}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 520,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "ef5f778ef7316162",
+        "type": "link in",
+        "z": "7dc5537943c4252d",
+        "name": "link in 5",
+        "links": [
+            "42ea0c586fd98924"
+        ],
+        "x": 475,
+        "y": 520,
+        "wires": [
+            [
+                "997e0123266a5be0"
+            ]
+        ]
+    },
+    {
+        "id": "ae4a1e4da3434ba6",
+        "type": "pythonshell in",
+        "z": "28309d8b1abf5b6f",
+        "name": "easycat 3232",
+        "pyfile": "/home/jinyistudio/python/node-red-easycat-3232.py",
+        "virtualenv": "/home/jinyistudio/python/blinka",
+        "continuous": true,
+        "stdInData": true,
+        "x": 830,
+        "y": 1000,
+        "wires": [
+            [
+                "5ead846670b3774c"
+            ]
+        ]
+    },
+    {
+        "id": "45f118d4cfa28771",
+        "type": "buffer-parser",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint8",
+                "name": "byte0",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte1",
+                "offset": 1,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte2",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte3",
+                "offset": 3,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte4",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte5",
+                "offset": 5,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte6",
+                "offset": 6,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte7",
+                "offset": 7,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte8",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte9",
+                "offset": 9,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte10",
+                "offset": 10,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte11",
+                "offset": 11,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte12",
+                "offset": 12,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte13",
+                "offset": 13,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte14",
+                "offset": 14,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte15",
+                "offset": 15,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte16",
+                "offset": 16,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte17",
+                "offset": 17,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte18",
+                "offset": 18,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte19",
+                "offset": 19,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte20",
+                "offset": 20,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte21",
+                "offset": 21,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte22",
+                "offset": 22,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte23",
+                "offset": 23,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte24",
+                "offset": 24,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte25",
+                "offset": 25,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte26",
+                "offset": 26,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte27",
+                "offset": 27,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte28",
+                "offset": 28,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte29",
+                "offset": 29,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte30",
+                "offset": 30,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint8",
+                "name": "byte31",
+                "offset": 31,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 305,
+        "y": 160,
+        "wires": [
+            [
+                "6336f276a84f8d38"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c8a640d0e6cfb5c5",
+        "type": "debug",
+        "z": "28309d8b1abf5b6f",
+        "name": "debug 44",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 475,
+        "y": 120,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "6fd6ebcda797cef7",
+        "type": "comment",
+        "z": "28309d8b1abf5b6f",
+        "name": "EasyCAT HAT 👉 Node-RED",
+        "info": "",
+        "x": 240,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b926d928339cefbb",
+        "type": "function",
+        "z": "28309d8b1abf5b6f",
+        "name": "function 41",
+        "func": "\nif(msg.payload.length>=66) {\n    var buf = new Buffer(32);\n    var j = 2;\n    var i =0 ;\n    for ( i=0 ; i < 32 ; i++ ){\n        buf[i]=parseInt(msg.payload.substring(j,j+2),16);\n        j=j+2;\n    }\n    return {'payload':buf};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 215,
+        "y": 160,
+        "wires": [
+            [
+                "45f118d4cfa28771",
+                "34cd2b8b936c7a59"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8fc5128e1d4cea1d",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte0",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte0",
+        "payloadType": "str",
+        "x": 250,
+        "y": 820,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "e92d8dce1d2c589f",
+        "type": "buffer-maker",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "name": "item0",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte0"
+            },
+            {
+                "name": "item1",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte1"
+            },
+            {
+                "name": "item2",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte2"
+            },
+            {
+                "name": "item3",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte3"
+            },
+            {
+                "name": "item4",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte4"
+            },
+            {
+                "name": "item5",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte5"
+            },
+            {
+                "name": "item6",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte6"
+            },
+            {
+                "name": "item7",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte7"
+            },
+            {
+                "name": "item8",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte8"
+            },
+            {
+                "name": "item9",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte9"
+            },
+            {
+                "name": "item10",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte10"
+            },
+            {
+                "name": "item11",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte11"
+            },
+            {
+                "name": "item12",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte12"
+            },
+            {
+                "name": "item13",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte13"
+            },
+            {
+                "name": "item14",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte14"
+            },
+            {
+                "name": "item15",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte15"
+            },
+            {
+                "name": "item16",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte16"
+            },
+            {
+                "name": "item17",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte17"
+            },
+            {
+                "name": "item18",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte18"
+            },
+            {
+                "name": "item19",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte19"
+            },
+            {
+                "name": "item20",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte20"
+            },
+            {
+                "name": "item21",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte21"
+            },
+            {
+                "name": "item22",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte22"
+            },
+            {
+                "name": "item23",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte23"
+            },
+            {
+                "name": "item24",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte24"
+            },
+            {
+                "name": "item25",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte25"
+            },
+            {
+                "name": "item26",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte26"
+            },
+            {
+                "name": "item27",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte27"
+            },
+            {
+                "name": "item28",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte28"
+            },
+            {
+                "name": "item29",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte29"
+            },
+            {
+                "name": "item30",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte30"
+            },
+            {
+                "name": "item31",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "global",
+                "data": "byte31"
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "x": 595,
+        "y": 1000,
+        "wires": [
+            [
+                "3f7123b3dfafc476"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "fa66d5bf54f6e5c7",
+        "type": "debug",
+        "z": "28309d8b1abf5b6f",
+        "name": "debug 45",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 755,
+        "y": 940,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "be77326282af41d1",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte1",
+        "payloadType": "str",
+        "x": 250,
+        "y": 880,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "d93bc3e5210dd082",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte2",
+        "payloadType": "str",
+        "x": 250,
+        "y": 940,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "6b46439521ba4470",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte13",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte13",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1020,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "8b51201c27fb5a51",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte31",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte31",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1220,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "d3813bad4acfc4a8",
+        "type": "random",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "low": 1,
+        "high": "200",
+        "inte": "true",
+        "property": "value",
+        "x": 415,
+        "y": 1000,
+        "wires": [
+            [
+                "cded465788159ff1"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "cded465788159ff1",
+        "type": "function",
+        "z": "28309d8b1abf5b6f",
+        "name": "function 38",
+        "func": "flow.set(msg.payload,msg.value);\nnode.status({text:msg.payload + \"=\" + msg.value});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 515,
+        "y": 1000,
+        "wires": [
+            [
+                "e92d8dce1d2c589f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d21f560beaef36d5",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte21",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte21",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1080,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "fc897946370d118b",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte30",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "byte30",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1160,
+        "wires": [
+            [
+                "d3813bad4acfc4a8"
+            ]
+        ]
+    },
+    {
+        "id": "133e2d3e6fc738ef",
+        "type": "comment",
+        "z": "28309d8b1abf5b6f",
+        "name": "Node-RED 👉 EasyCAT HAT",
+        "info": "",
+        "x": 240,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "5ead846670b3774c",
+        "type": "link out",
+        "z": "28309d8b1abf5b6f",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "fa959ccaed818ab2"
+        ],
+        "x": 945,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "fa959ccaed818ab2",
+        "type": "link in",
+        "z": "28309d8b1abf5b6f",
+        "name": "link in 2",
+        "links": [
+            "5ead846670b3774c"
+        ],
+        "x": 145,
+        "y": 160,
+        "wires": [
+            [
+                "b926d928339cefbb"
+            ]
+        ]
+    },
+    {
+        "id": "3f7123b3dfafc476",
+        "type": "function",
+        "z": "28309d8b1abf5b6f",
+        "name": "function 42",
+        "func": "var buff = msg.payload;\nvar ss='<>';\n\nbuff.forEach(function(t,i){\n  //console.log('%s is %s', i, t);\n  ss = ss + ('0' + t.toString(16)).slice(-2);\n})\n\nreturn {'payload':ss.toUpperCase(),'size':ss.length};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 675,
+        "y": 1000,
+        "wires": [
+            [
+                "fa66d5bf54f6e5c7",
+                "ae4a1e4da3434ba6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "34cd2b8b936c7a59",
+        "type": "debug",
+        "z": "28309d8b1abf5b6f",
+        "name": "debug 48",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 305,
+        "y": 120,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "6336f276a84f8d38",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "fromEasyCAT",
+                "tot": "flow",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 375,
+        "y": 160,
+        "wires": [
+            [
+                "c8a640d0e6cfb5c5",
+                "9d54adb717e36526",
+                "de3579d03d44e972",
+                "c8d929583fdfdcb5",
+                "d4c5695926e16251",
+                "8bf3868db0bb6418",
+                "0091c97203d9c846",
+                "0daf7e6866f5d014",
+                "ae8a4c8a411c4ebe"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "a37b788c74c37b48",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.25",
+        "topic": "",
+        "payload": "start",
+        "payloadType": "str",
+        "x": 515,
+        "y": 940,
+        "wires": [
+            [
+                "e92d8dce1d2c589f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c262f534090c5daa",
+        "type": "redplc-ma-memory",
+        "z": "28309d8b1abf5b6f",
+        "address": "1",
+        "persistent": 0,
+        "tupdate": 20,
+        "meminit": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+        ],
+        "x": 210,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2f0df661fc38935a",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": 0,
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9d54adb717e36526",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte0",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "2f0df661fc38935a"
+            ]
+        ]
+    },
+    {
+        "id": "de3579d03d44e972",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte1",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "ae17b33241f39a08"
+            ]
+        ]
+    },
+    {
+        "id": "ae17b33241f39a08",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "1",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c8d929583fdfdcb5",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "6867c14cd5d730fc"
+            ]
+        ]
+    },
+    {
+        "id": "d4c5695926e16251",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte3",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "c3882f2d80bfdf8f"
+            ]
+        ]
+    },
+    {
+        "id": "6867c14cd5d730fc",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "2",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c3882f2d80bfdf8f",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "3",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8bf3868db0bb6418",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "db7b915562cdc719"
+            ]
+        ]
+    },
+    {
+        "id": "db7b915562cdc719",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "4",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0091c97203d9c846",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte5",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 460,
+        "wires": [
+            [
+                "9df433795f8efa72"
+            ]
+        ]
+    },
+    {
+        "id": "9df433795f8efa72",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "5",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0daf7e6866f5d014",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte6",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte6",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 520,
+        "wires": [
+            [
+                "e3564af9144250c9"
+            ]
+        ]
+    },
+    {
+        "id": "e3564af9144250c9",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "6",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ae8a4c8a411c4ebe",
+        "type": "change",
+        "z": "28309d8b1abf5b6f",
+        "name": "byte7",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "keyvalues.byte7",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 580,
+        "wires": [
+            [
+                "3b4a04da47026597"
+            ]
+        ]
+    },
+    {
+        "id": "3b4a04da47026597",
+        "type": "redplc-import",
+        "z": "28309d8b1abf5b6f",
+        "vartype": "MA",
+        "address": "1",
+        "index": "6",
+        "tofix": "0",
+        "name": "",
+        "x": 750,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "7671d2a0ca3575a8",
+        "type": "controltimer",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "timerType": "loop",
+        "timerDurationUnit": "millisecond",
+        "timerDurationType": "num",
+        "timerDuration": 30,
+        "timerLoopTimeoutUnit": "second",
+        "timerLoopTimeoutType": "num",
+        "timerLoopTimeout": 0,
+        "loopTimeoutMessageType": "str",
+        "loopTimeoutMessage": "LOOP_TIMEOUT",
+        "timerMaxLoopIterationsType": "num",
+        "timerMaxLoopIterations": 0,
+        "loopMaxIterationsMessageType": "str",
+        "loopMaxIterationsMessage": "MAX_LOOP_ITERATIONS",
+        "isRunningTimerProgressVisible": true,
+        "outputReceivedMessageOnTimerTrigger": true,
+        "outputReceivedMessageOnTimerHalt": false,
+        "startTimerOnReceivalOfUnknownMessage": false,
+        "resetTimerOnReceivalOfUnknownMessage": false,
+        "resetTimerOnReceivalOfStartAction": false,
+        "continueTimerOnReceivalOfStartAction": false,
+        "isDebugModeEnabled": false,
+        "timerTriggeredMessageType": "str",
+        "timerTriggeredMessage": "TIMER_TRIGGERED",
+        "timerHaltedMessageType": "str",
+        "timerHaltedMessage": "TIMER_HALTED",
+        "isStartActionEnabled": true,
+        "isStopActionEnabled": true,
+        "isResetActionEnabled": true,
+        "isPauseActionEnabled": true,
+        "isContinueActionEnabled": true,
+        "actionPropertyNameType": "str",
+        "actionPropertyName": "payload",
+        "startActionNameType": "str",
+        "startActionName": "START",
+        "stopActionNameType": "str",
+        "stopActionName": "STOP",
+        "resetActionNameType": "str",
+        "resetActionName": "RESET",
+        "pauseActionNameType": "str",
+        "pauseActionName": "PAUSE",
+        "continueActionNameType": "str",
+        "continueActionName": "CONTINUE",
+        "x": 475,
+        "y": 1280,
+        "wires": [
+            [
+                "e92d8dce1d2c589f"
+            ],
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "a027aaf2e288d4c3",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "RESET",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1380,
+        "wires": [
+            [
+                "7671d2a0ca3575a8"
+            ]
+        ]
+    },
+    {
+        "id": "28c1cb16bcebbdb2",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "STOP",
+        "payloadType": "str",
+        "x": 250,
+        "y": 1420,
+        "wires": [
+            [
+                "7671d2a0ca3575a8"
+            ]
+        ]
+    },
+    {
+        "id": "d19cee3f34dfa70d",
+        "type": "inject",
+        "z": "28309d8b1abf5b6f",
+        "name": "1000ms loop",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "timerType",
+                "v": "loop",
+                "vt": "str"
+            },
+            {
+                "p": "timerDuration",
+                "v": "1000",
+                "vt": "num"
+            },
+            {
+                "p": "timerDurationUnit",
+                "v": "millisecond",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "START",
+        "payloadType": "str",
+        "x": 230,
+        "y": 1340,
+        "wires": [
+            [
+                "7671d2a0ca3575a8"
+            ]
+        ]
+    },
+    {
+        "id": "93c67a4c6d492dae",
+        "type": "link in",
+        "z": "28309d8b1abf5b6f",
+        "name": "link in 3",
+        "links": [
+            "54357795d1c866a2"
+        ],
+        "x": 285,
+        "y": 1300,
+        "wires": [
+            [
+                "7671d2a0ca3575a8"
+            ]
+        ]
+    },
+    {
+        "id": "ded1a9f9c64a1d33",
+        "type": "link in",
+        "z": "28309d8b1abf5b6f",
+        "name": "link in 4",
+        "links": [
+            "6ee27ca778e5d276"
+        ],
+        "x": 475,
+        "y": 1200,
+        "wires": [
+            [
+                "e92d8dce1d2c589f"
+            ]
+        ]
+    },
+    {
+        "id": "a519ba455a10d15f",
+        "type": "redplc-sys-inject",
+        "z": "a1b2b31b.65fe7",
+        "sdelay": 200,
+        "tupdate": "50",
+        "outputs": 5,
+        "x": 200,
+        "y": 560,
+        "wires": [
+            [
+                "5d430ba19d8d3926"
+            ],
+            [
+                "b10d90d14837481c"
+            ],
+            [
+                "5d63f01cff2b467d"
+            ],
+            [
+                "3fbf5169e12bd3a5"
+            ],
+            [
+                "35c6deea8aa8deb2"
+            ]
+        ]
+    },
+    {
+        "id": "96959d72fe2b5a10",
+        "type": "redplc-timer",
+        "z": "a1b2b31b.65fe7",
+        "operation": "TPI",
+        "address": 0,
+        "timev": "100",
+        "timeu": "ms",
+        "persistent": 0,
+        "tpers": 20,
+        "name": "",
+        "x": 510,
+        "y": 640,
+        "wires": [
+            [
+                "08be6050f866ba8c"
+            ]
+        ]
+    },
+    {
+        "id": "b10d90d14837481c",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "1",
+        "outputs": 1,
+        "name": "",
+        "x": 395,
+        "y": 640,
+        "wires": [
+            [
+                "96959d72fe2b5a10"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "08be6050f866ba8c",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "0",
+        "outputs": 0,
+        "name": "",
+        "x": 675,
+        "y": 640,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "4bd0da33656a8639",
+        "type": "redplc-m-memory",
+        "z": "a1b2b31b.65fe7",
+        "address": 0,
+        "persistent": 0,
+        "tupdate": 20,
+        "meminit": [],
+        "x": 140,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "55c5a10408ad4634",
+        "type": "switch",
+        "z": "a1b2b31b.65fe7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "prev"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 555,
+        "y": 740,
+        "wires": [
+            [
+                "c12ca430e79e6ee5"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "5d0f653d7ebb6407",
+        "type": "redplc-sys-onstart",
+        "z": "a1b2b31b.65fe7",
+        "sdelay": 100,
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "a519ba455a10d15f"
+            ]
+        ]
+    },
+    {
+        "id": "5d63f01cff2b467d",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "1",
+        "outputs": 1,
+        "name": "",
+        "x": 395,
+        "y": 740,
+        "wires": [
+            [
+                "56d9534399aa50ce"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "56d9534399aa50ce",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "NO",
+        "vartype": "T",
+        "address": 0,
+        "index": 0,
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 475,
+        "y": 740,
+        "wires": [
+            [
+                "55c5a10408ad4634",
+                "105c02f1db57cf0f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c12ca430e79e6ee5",
+        "type": "switch",
+        "z": "a1b2b31b.65fe7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 625,
+        "y": 740,
+        "wires": [
+            [
+                "ba214f81e7603239"
+            ],
+            [
+                "ddd6589e9433db4f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "ba214f81e7603239",
+        "type": "change",
+        "z": "a1b2b31b.65fe7",
+        "name": "ON",
+        "rules": [
+            {
+                "t": "set",
+                "p": "neo_cmd",
+                "pt": "global",
+                "to": "255",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "neo_num",
+                "pt": "global",
+                "to": "255",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "neo_red",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "neo_green",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "neo_blue",
+                "pt": "global",
+                "to": "120",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 720,
+        "wires": [
+            [
+                "5ce76427a5ee9b64"
+            ]
+        ]
+    },
+    {
+        "id": "e890a83109df4d13",
+        "type": "link out",
+        "z": "a1b2b31b.65fe7",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "915c5afa5bec36cb"
+        ],
+        "x": 925,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "ddd6589e9433db4f",
+        "type": "change",
+        "z": "a1b2b31b.65fe7",
+        "name": "OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "neo_cmd",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "neo_red",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "neo_green",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "neo_blue",
+                "pt": "global",
+                "to": "0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "neo_num",
+                "pt": "msg",
+                "to": "255",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 760,
+        "wires": [
+            [
+                "5ce76427a5ee9b64"
+            ]
+        ]
+    },
+    {
+        "id": "13265803df6c112e",
+        "type": "comment",
+        "z": "a1b2b31b.65fe7",
+        "name": "CCnnRRggbb",
+        "info": "",
+        "x": 930,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "843fe7b37a993958",
+        "type": "debug",
+        "z": "a1b2b31b.65fe7",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 925,
+        "y": 800,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "8a592bb62dc3b3c2",
+        "type": "redplc-ma-memory",
+        "z": "a1b2b31b.65fe7",
+        "address": 0,
+        "persistent": 0,
+        "tupdate": 20,
+        "meminit": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+        ],
+        "x": 290,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9b6376e0f71d19bb",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": 0,
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte0",
+        "ostring": false,
+        "name": "byte0",
+        "x": 590,
+        "y": 80,
+        "wires": [
+            [
+                "1988af7f58cf5c0f",
+                "97a55512939b5216"
+            ],
+            [
+                "0f9a2b7fd8dc070b"
+            ]
+        ]
+    },
+    {
+        "id": "b78faa99c7fb05a9",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "1",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte1",
+        "ostring": false,
+        "name": "byte1",
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "0f9a2b7fd8dc070b"
+            ]
+        ]
+    },
+    {
+        "id": "5d430ba19d8d3926",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "1",
+        "outputs": 1,
+        "name": "",
+        "x": 445,
+        "y": 80,
+        "wires": [
+            [
+                "9b6376e0f71d19bb",
+                "b78faa99c7fb05a9",
+                "56d0696c002c9ed1",
+                "dcd6414a28702286",
+                "dbb44ef8084c6c42",
+                "fce056db738a7f1c",
+                "afeb723d77ee1806",
+                "132475f043a160e6"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "1988af7f58cf5c0f",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "0",
+        "outputs": 0,
+        "name": "",
+        "x": 915,
+        "y": 180,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "56d0696c002c9ed1",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "2",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte2",
+        "ostring": false,
+        "name": "byte2",
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "0f9a2b7fd8dc070b"
+            ]
+        ]
+    },
+    {
+        "id": "dcd6414a28702286",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "3",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte3",
+        "ostring": false,
+        "name": "byte3",
+        "x": 590,
+        "y": 260,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "0f9a2b7fd8dc070b"
+            ]
+        ]
+    },
+    {
+        "id": "dbb44ef8084c6c42",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "4",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte4",
+        "ostring": false,
+        "name": "byte4",
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "6e10ceb712c13577"
+            ]
+        ]
+    },
+    {
+        "id": "fce056db738a7f1c",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "5",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte5",
+        "ostring": false,
+        "name": "byte5",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "6e10ceb712c13577"
+            ]
+        ]
+    },
+    {
+        "id": "afeb723d77ee1806",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "6",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte6",
+        "ostring": false,
+        "name": "byte6",
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "6e10ceb712c13577"
+            ]
+        ]
+    },
+    {
+        "id": "132475f043a160e6",
+        "type": "redplc-export",
+        "z": "a1b2b31b.65fe7",
+        "vartype": "MA",
+        "address": 0,
+        "index": "7",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "tofix": "0",
+        "topic": "",
+        "label": "byte7",
+        "ostring": false,
+        "name": "byte7",
+        "x": 590,
+        "y": 500,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ],
+            [
+                "6e10ceb712c13577"
+            ]
+        ]
+    },
+    {
+        "id": "0f9a2b7fd8dc070b",
+        "type": "function",
+        "z": "a1b2b31b.65fe7",
+        "name": "function 43",
+        "func": "global.set(msg.label, msg.payload);\nvar v0 = flow.get(msg.label)||0;\nvar b1 = msg.payload!=v0 ? true : false;\nflow.set(msg.label,msg.payload);\nif (b1) {\n    return {\"topic\":msg.label,'payload':msg.payload};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 895,
+        "y": 300,
+        "wires": [
+            [
+                "e5aeedde092bb453"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "6e10ceb712c13577",
+        "type": "function",
+        "z": "a1b2b31b.65fe7",
+        "name": "function 44",
+        "func": "global.set(msg.label, msg.payload);\nvar v0 = flow.get(msg.label)||0;\nvar b1 = msg.payload!=v0 ? true : false;\nflow.set(msg.label,msg.payload);\nif (b1) {\n    return {\"topic\":msg.label,'payload':msg.payload};\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 895,
+        "y": 420,
+        "wires": [
+            [
+                "e5aeedde092bb453"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3fbf5169e12bd3a5",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "1",
+        "outputs": 1,
+        "name": "",
+        "x": 395,
+        "y": 960,
+        "wires": [
+            [
+                "42f1f5c4ed77bdb3"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "42f1f5c4ed77bdb3",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "P",
+        "vartype": "T",
+        "address": 0,
+        "index": 0,
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 475,
+        "y": 960,
+        "wires": [
+            [
+                "5ed013a6a32a57c8",
+                "edb6ca2a74e35baf"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "5ed013a6a32a57c8",
+        "type": "redplc-math",
+        "z": "a1b2b31b.65fe7",
+        "operation": "inc",
+        "vartype": "MA",
+        "address": 0,
+        "index": 0,
+        "counter": "PV",
+        "timer": "PT",
+        "vartype1": "MA",
+        "address1": 0,
+        "index1": 0,
+        "counter1": "CV",
+        "timer1": "ET",
+        "timeu1": "s",
+        "const1": "1",
+        "fconst1": "PI",
+        "vartype2": "#",
+        "address2": 0,
+        "index2": 0,
+        "counter2": "CV",
+        "timer2": "ET",
+        "timeu2": "s",
+        "const2": 10,
+        "fconst2": "PI",
+        "tofix": "0",
+        "name": "",
+        "x": 630,
+        "y": 960,
+        "wires": [
+            [
+                "c833bfe65677c278"
+            ]
+        ]
+    },
+    {
+        "id": "c833bfe65677c278",
+        "type": "redplc-compare",
+        "z": "a1b2b31b.65fe7",
+        "operation": "gt",
+        "vartype1": "MA",
+        "address1": 0,
+        "index1": 0,
+        "counter1": "CV",
+        "timer1": "ET",
+        "vartype2": "#",
+        "address2": 0,
+        "index2": 0,
+        "counter2": "CV",
+        "timer2": "ET",
+        "timeu2": "s",
+        "const2": "255",
+        "name": "",
+        "x": 770,
+        "y": 960,
+        "wires": [
+            [
+                "c2d196f8b5fb0ff2"
+            ]
+        ]
+    },
+    {
+        "id": "c2d196f8b5fb0ff2",
+        "type": "redplc-move",
+        "z": "a1b2b31b.65fe7",
+        "vartype1": "#",
+        "address1": 0,
+        "index1": 0,
+        "counter1": "CV",
+        "timer1": "ET",
+        "timeu1": "s",
+        "const1": "0",
+        "fconst1": "PI",
+        "vartype2": "MA",
+        "address2": 0,
+        "index2": 0,
+        "counter2": "PV",
+        "timer2": "PT",
+        "tofix": "0",
+        "name": "",
+        "x": 890,
+        "y": 960,
+        "wires": [
+            [
+                "4bddf5fc228c87e9"
+            ]
+        ]
+    },
+    {
+        "id": "4bddf5fc228c87e9",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "0",
+        "outputs": 0,
+        "name": "",
+        "x": 985,
+        "y": 960,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "6ee27ca778e5d276",
+        "type": "link out",
+        "z": "a1b2b31b.65fe7",
+        "name": "toeasycat",
+        "mode": "link",
+        "links": [
+            "ded1a9f9c64a1d33"
+        ],
+        "x": 1135,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e5aeedde092bb453",
+        "type": "change",
+        "z": "a1b2b31b.65fe7",
+        "name": "RESET",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "RESET",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 360,
+        "wires": [
+            [
+                "54357795d1c866a2",
+                "6ee27ca778e5d276"
+            ]
+        ]
+    },
+    {
+        "id": "54357795d1c866a2",
+        "type": "link out",
+        "z": "a1b2b31b.65fe7",
+        "name": "totimer",
+        "mode": "link",
+        "links": [
+            "93c67a4c6d492dae"
+        ],
+        "x": 1135,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7defa3e405f619b7",
+        "type": "template",
+        "z": "a1b2b31b.65fe7",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"clear\": false,\n    \"msgs\": [\n        {\n            \"x\": 2,\n            \"y\": 0,\n            \"text\": \"byte0: {{payload}}\",\n            \"center\": true\n        }\n    ]\n}",
+        "output": "json",
+        "x": 775,
+        "y": 1100,
+        "wires": [
+            [
+                "0b7590ecc3a2587e",
+                "42ea0c586fd98924"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "edb6ca2a74e35baf",
+        "type": "switch",
+        "z": "a1b2b31b.65fe7",
+        "name": "",
+        "property": "byte0",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "",
+                "vt": "prev"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 595,
+        "y": 1100,
+        "wires": [
+            [
+                "7f90e02e2db0770b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7f90e02e2db0770b",
+        "type": "change",
+        "z": "a1b2b31b.65fe7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "byte0",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 645,
+        "y": 1100,
+        "wires": [
+            [
+                "bc62a5c75d9d0b42"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "bc62a5c75d9d0b42",
+        "type": "function",
+        "z": "a1b2b31b.65fe7",
+        "name": "function 45",
+        "func": "var byte0 = global.get('byte0');\nvar s1 = byte0.toString().padEnd(3, ' ');\nnode.status({text:s1});\nreturn {'payload': s1};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 705,
+        "y": 1100,
+        "wires": [
+            [
+                "7defa3e405f619b7"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "0b7590ecc3a2587e",
+        "type": "debug",
+        "z": "a1b2b31b.65fe7",
+        "name": "debug 49",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 845,
+        "y": 1080,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "42ea0c586fd98924",
+        "type": "link out",
+        "z": "a1b2b31b.65fe7",
+        "name": "tolcd1602",
+        "mode": "link",
+        "links": [
+            "915c5afa5bec36cb",
+            "ef5f778ef7316162"
+        ],
+        "x": 845,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "57ac9478777406c4",
+        "type": "comment",
+        "z": "a1b2b31b.65fe7",
+        "name": "將byte0的值顯示於LCD1602",
+        "info": "",
+        "x": 700,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "c4b0c46145119b6e",
+        "type": "redplc-rpi-gpio-out",
+        "z": "a1b2b31b.65fe7",
+        "address": 0,
+        "tupdate": 20,
+        "gpioinit": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+        ],
+        "gpioactv": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+        ],
+        "x": 825,
+        "y": 60,
+        "wires": [
+            [
+                "1988af7f58cf5c0f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "105c02f1db57cf0f",
+        "type": "redplc-coil",
+        "z": "a1b2b31b.65fe7",
+        "operation": "ST",
+        "vartype": "Q",
+        "address": 0,
+        "index": "12",
+        "counter": "R",
+        "timer": "R",
+        "fflop": "R",
+        "name": "",
+        "x": 630,
+        "y": 860,
+        "wires": [
+            [
+                "b099e5e76bc7dd22"
+            ]
+        ]
+    },
+    {
+        "id": "b099e5e76bc7dd22",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "0",
+        "outputs": 0,
+        "name": "",
+        "x": 735,
+        "y": 860,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "11cee4fb5d4af6a0",
+        "type": "comment",
+        "z": "a1b2b31b.65fe7",
+        "name": "閃爍控制breadpi的LED#1",
+        "info": "",
+        "x": 670,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "35c6deea8aa8deb2",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "1",
+        "outputs": 1,
+        "name": "",
+        "x": 395,
+        "y": 1260,
+        "wires": [
+            [
+                "fbd58cf7c8e838b8",
+                "d7a22445087d592a"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "fbd58cf7c8e838b8",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "NO",
+        "vartype": "I",
+        "address": 0,
+        "index": "5",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 475,
+        "y": 1260,
+        "wires": [
+            [
+                "5135788489ee3196"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "97a55512939b5216",
+        "type": "redplc-rpi-gpio-in",
+        "z": "a1b2b31b.65fe7",
+        "address": 0,
+        "tupdate": 20,
+        "gpioinit": [
+            "0",
+            "0",
+            "0",
+            "2",
+            "2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+        ],
+        "x": 755,
+        "y": 60,
+        "wires": [
+            [
+                "c4b0c46145119b6e"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "46d289a3fa0f60ef",
+        "type": "redplc-m-memory",
+        "z": "a1b2b31b.65fe7",
+        "address": "1",
+        "persistent": 0,
+        "tupdate": 20,
+        "meminit": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ],
+        "x": 140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d98fbd663e408a7a",
+        "type": "redplc-coil",
+        "z": "a1b2b31b.65fe7",
+        "operation": "ST",
+        "vartype": "Q",
+        "address": "0",
+        "index": "16",
+        "counter": "R",
+        "timer": "R",
+        "fflop": "R",
+        "name": "",
+        "x": 825,
+        "y": 1260,
+        "wires": [
+            [
+                "314db3a6490ccecd"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "314db3a6490ccecd",
+        "type": "redplc-sys-rail",
+        "z": "a1b2b31b.65fe7",
+        "rtype": "0",
+        "outputs": 0,
+        "name": "",
+        "x": 895,
+        "y": 1260,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "5135788489ee3196",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "NC",
+        "vartype": "Q",
+        "address": "0",
+        "index": "16",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 545,
+        "y": 1260,
+        "wires": [
+            [
+                "fa3e343f453be1d0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d7a22445087d592a",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "NO",
+        "vartype": "Q",
+        "address": "0",
+        "index": "16",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 515,
+        "y": 1340,
+        "wires": [
+            [
+                "fa3e343f453be1d0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "87cfcff36b95e3b7",
+        "type": "redplc-contact",
+        "z": "a1b2b31b.65fe7",
+        "operation": "NC",
+        "vartype": "I",
+        "address": "0",
+        "index": "6",
+        "counter": "QU",
+        "timer": "Q",
+        "fflop": "Q",
+        "name": "",
+        "x": 695,
+        "y": 1260,
+        "wires": [
+            [
+                "d98fbd663e408a7a"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "55b809525df362b6",
+        "type": "comment",
+        "z": "a1b2b31b.65fe7",
+        "name": "按鈕I0.5, 按鈕I0.6 控制 LED燈Q0.16 的ON/OFF",
+        "info": "",
+        "x": 560,
+        "y": 1200,
+        "wires": []
+    }
+]
