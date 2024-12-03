@@ -6,36 +6,61 @@ from functools import partial
 class ModernNavBar(UserControl):
     def __init__(self):
         super().__init__()
+        self.selected=None    
+        self.items:list=[] 
+           
+                    
 
-    def HighlightContainer(self, e):          
-
-        if e.data == "true":
-            e.control.bgcolor='grey200'
-            #e.control.content.controls[0].icon_color = "purple300"
-            #e.control.content.controls[1].color = "purple300"
-            e.control.update()
-            e.control.content.controls[1].color = "grey"
-            e.control.content.controls[1].weight=FontWeight.W_600
-            e.control.content.controls[1].update()
-        else:
-            e.control.bgcolor='white'            
-            #e.control.content.controls[0].icon_color = "black"
+    def HighlightContainer(self, e):         
+        if self.selected != e.control:
+            if e.data == "true":        
+                e.control.bgcolor='grey200'
+                #e.control.content.controls[0].icon_color = "purple300"
+                #e.control.content.controls[1].color = "purple300"
+           
+                e.control.content.controls[1].color = "black"
+                e.control.content.controls[1].weight=FontWeight.W_700
+                #e.control.content.controls[1].update()               
+            else:
+                e.control.bgcolor='white'            
+                #e.control.content.controls[0].icon_color = "black"
             
-            e.control.update()
-            e.control.content.controls[1].color = "black"
-            e.control.content.controls[1].weight=FontWeight.NORMAL
-            e.control.content.controls[1].update()
+                #e.control.update()
+                e.control.content.controls[1].color = "black"
+                e.control.content.controls[1].weight=FontWeight.NORMAL
+                #e.control.content.controls[1].update()
+                
+        else:
+            e.control.bgcolor='green200'
+            
+        e.control.update()
+
+    def SelectedContainer(self, e):          
+        if self.selected is None:
+            self.selected=e.control
+        else:
+            if self.selected != e.control:
+                for item in self.body.content.controls:
+                    if self.selected==item:
+                        self.selected.bgcolor='white'
+                        self.selected.update()
+                        break
+
+            self.selected=e.control
+            self.selected.bgcolor='green200'
+            self.selected.update()                   
+        
 
     def ContainedIcon(self, icon_name, text, data):
         return Container(
-            data=data,
+            data=data,           
             width=180,
             height=45,
             border_radius=10,            
             on_hover=lambda e: self.HighlightContainer(e),
+            on_click=lambda e: self.SelectedContainer(e),
             ink=False,
-            content=Row(
-               
+            content=Row(               
                 controls=[
                     IconButton(
                         icon=icon_name,
@@ -59,7 +84,7 @@ class ModernNavBar(UserControl):
         )
 
     def build(self):
-        return Container(
+        self.body=Container(
             alignment=alignment.center,
             padding=10,
             clip_behavior=ClipBehavior.HARD_EDGE,
@@ -82,3 +107,4 @@ class ModernNavBar(UserControl):
                 ],
             ),
         )
+        return self.body

@@ -24,6 +24,7 @@ class MainStackContainer(UserControl):
     # need a final function to hide the side menu when user clicks outside contianer
     def HideMenu(self, e):
         # main page control
+        
         main = self.controls[0].content.controls[0].controls[0]
         # menu page control
         menu = self.controls[0].content.controls[1].controls[0]
