@@ -1,0 +1,14 @@
+[Unit]
+Description=Flet App
+After=network.target
+
+[Service]
+User=jinyistudio
+Group=jinyistudio
+WorkingDirectory=/home/jinyistudio/python/flet26/project/nginx
+Environment="PATH=/home/jinyistudio/python/flet26/bin"
+Environment="FLET_SERVER_PORT=8000"
+ExecStart=/home/jinyistudio/python/flet26/bin/python /home/jinyistudio/python/flet26/project/nginx/myapp.py --web
+
+[Install]
+WantedBy=multi-user.target
